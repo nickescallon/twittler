@@ -31,40 +31,18 @@
           var newLength = streams.home.length - 1;
           while(newLength >= index){
             var tweet = streams.home[index];
-            constructTweet(tweet);
-            /*var $tweet = $('<div class="tweet"></div>');
+            $tweet = $('<div class="tweet">' +
+              '<div class="heading">' +
+                '<div class="user">' + tweet.user + '</div>' +
+                '<div class="timestamp">' + tweet.created_at + '</div>' +
+              '</div>' +
+              '<div class="content">' + tweet.message + '</div>' +
+            '</div>');
             $tweet.prependTo($body);
-            $tweetHeading = $('<div class="heading"></div>');
-            $tweetHeading.appendTo($("body").find('.tweet').first());
-            $tweetUser = $('<div class="user"></div>');
-            $tweetUser.text('@' + tweet.user + ':');
-            $tweetUser.appendTo($("body").find('.heading').first());
-            $tweetTimestamp = $('<div class="timestamp"></div>');
-            $tweetTimestamp.text(tweet.created_at);
-            $tweetTimestamp.appendTo($("body").find('.heading').first());
-            $tweetContent = $('<div class="content"></div>');
-            $tweetContent.text(tweet.message);
-            $tweetContent.appendTo($("body").find('.tweet').first('.content'));*/
             index += 1;
             displayIndex += 1;
           }
         };
-
-        var constructTweet = function(tweet){
-          var $tweet = $('<div class="tweet"></div>');
-          $tweet.prependTo($body);
-          $tweetHeading = $('<div class="heading"></div>');
-          $tweetHeading.appendTo($("body").find('.tweet').first());
-          $tweetUser = $('<div class="user"></div>');
-          $tweetUser.text('@' + tweet.user + ':');
-          $tweetUser.appendTo($("body").find('.heading').first());
-          $tweetTimestamp = $('<div class="timestamp"></div>');
-          $tweetTimestamp.text(tweet.created_at);
-          $tweetTimestamp.appendTo($("body").find('.heading').first());
-          $tweetContent = $('<div class="content"></div>');
-          $tweetContent.text(tweet.message);
-          $tweetContent.appendTo($("body").find('.tweet').first('.content'));
-        }
         
         setInterval(function(){
           displayNewTweets();
