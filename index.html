@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="Stylesheet" type="text/css" href="main.css"/>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
   </head>
@@ -11,12 +12,13 @@
         var $body = $('body');
         $body.html('');
 
+        //initialize DisplayIndex;
         var displayIndex = 0;
 
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
+          var $tweet = $('<div class="tweet"></div>');
           $tweet.text('@' + tweet.user + ': ' + tweet.message + " // " + tweet.created_at);
           $tweet.appendTo($body);
           index -= 1;
@@ -29,17 +31,30 @@
           var newLength = streams.home.length - 1;
           while(newLength >= index){
             var tweet = streams.home[index];
-            var $tweet = $('<div></div>');
-            $tweet.text('@' + tweet.user + ': ' + tweet.message + " // " + tweet.created_at);
+            var $tweet = $('<div class="tweet"></div>');
             $tweet.prependTo($body);
+            $tweetHeading = $('<div class="heading"></div>');
+            $tweetHeading.appendTo($("body").find('.tweet').first());
+            $tweetUser = $('<div class="user"></div>');
+            $tweetUser.text('@' + tweet.user + ':');
+            $tweetUser.appendTo($("body").find('.heading').first());
+            $tweetTimestamp = $('<div class="timestamp"></div>');
+            $tweetTimestamp.text(tweet.created_at);
+            $tweetTimestamp.appendTo($("body").find('.heading').first());
+            $tweetContent = $('<div class="content"></div>');
+            $tweetContent.text(tweet.message);
+            $tweetContent.appendTo($("body").find('.tweet').first('.content'));
+
+
+
             index += 1;
             displayIndex += 1;
           }
         };
         
-        /*setInterval(function(){
+        setInterval(function(){
           displayNewTweets();
-        }, 10000);*/
+        }, 1000);
 
       });
 
