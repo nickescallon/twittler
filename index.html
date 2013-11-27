@@ -12,6 +12,9 @@
         var $body = $('body');
         $body.html('');
 
+        $tweetContainer = $('<div id="tweetContainer"></div>');
+        $tweetContainer.appendTo($body);
+
         //initialize DisplayIndex;
         var displayIndex = 0;
 
@@ -20,7 +23,7 @@
           var tweet = streams.home[index];
           var $tweet = $('<div class="tweet"></div>');
           $tweet.text('@' + tweet.user + ': ' + tweet.message + " // " + tweet.created_at);
-          $tweet.appendTo($body);
+          $tweet.appendTo($tweetContainer);
           index -= 1;
           displayIndex +=1;
         }
@@ -33,17 +36,17 @@
             var tweet = streams.home[index];
             $tweet = $('<div class="tweet">' +
               '<div class="heading">' +
-                '<div class="user">' + tweet.user + '</div>' +
+                '<div class="user">@' + tweet.user + '</div>' +
                 '<div class="timestamp">' + tweet.created_at + '</div>' +
               '</div>' +
               '<div class="content">' + tweet.message + '</div>' +
             '</div>');
-            $tweet.prependTo($body);
+            $tweet.prependTo($tweetContainer);
             index += 1;
             displayIndex += 1;
           }
         };
-        
+
         setInterval(function(){
           displayNewTweets();
         }, 1000);

@@ -2,13 +2,22 @@ body {
 	background-color: lightblue;
 }
 
+#tweetContainer {
+	height: 100%;
+	width: 450px;
+	margin-left: auto;
+	margin-right: auto;
+	border-top: 1px solid grey;
+}
 
 
 .tweet {
 	height: 80px;
-	width: 450px;
+	width: 448px;
 	background-color: lightgrey;
-	border: 1px solid grey;
+	border-left: 1px solid grey;
+	border-right: 1px solid grey;
+	border-bottom: 1px solid grey;
 }
 
 .heading {
@@ -21,7 +30,7 @@ body {
 .user {
 	float: left;
 	height:98%;
-	padding: 2px, 5px;
+	padding: 2px 7px;
 }
 
 .timestamp {
