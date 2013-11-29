@@ -20,7 +20,7 @@
         //initialize DisplayIndex;
         var displayIndex = 0;
 
-        var index = streams.home.length - 1;
+        /*var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = $('<div class="tweet"></div>');
@@ -28,7 +28,7 @@
           $tweet.appendTo($tweetContainer);
           index -= 1;
           displayIndex +=1;
-        }
+        }*/
 
         //prepends new tweets to body
         var displayNewTweets = function(){
@@ -38,7 +38,7 @@
             var tweet = streams.home[index];
             $tweet = $('<div class="tweet">' +
               '<div class="heading">' +
-                '<div class="user">@' + tweet.user + '</div>' +
+                '<div class="user"><span>@' + tweet.user + '</span></div>' +
                 '<div class="timestamp">' + tweet.created_at + '</div>' +
               '</div>' +
               '<div class="content">' + tweet.message + '</div>' +
