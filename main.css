@@ -1,10 +1,32 @@
 body {
 	background-color: lightblue;
+	margin: 0;
+}
+
+#header {
+	height: 55px;
+	width: 100%;
+	top: 0;
+	//background-color: black;
+	background: linear-gradient(lightgrey,grey);
+	position: fixed;
+	color: white;
+}
+
+#header h1 {
+	padding-left: 10px;
+	padding-bottom: 100px;
+}
+
+.spacer {
+	height: 20px;
+	width: 100%;
 }
 
 #tweetContainer {
 	height: 100%;
 	width: 450px;
+	margin-top: 55px;
 	margin-left: auto;
 	margin-right: auto;
 	border-top: 1px solid grey;
