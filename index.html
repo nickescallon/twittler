@@ -12,14 +12,12 @@
 
       $(document).ready(function(){
         var $body = $('body');
-        //$body.html('');
-        var startDate = new Date();
-        var startTime = startDate.getTime();
 
         var prettyDate = function(timeStamp){
           var currentDate = new Date();
           var currentTime = currentDate.getTime();
-          var timeDelta = (currentTime - startTime)/1000;
+          var createdTime = Date.parse(timeStamp);
+          var timeDelta = (currentTime - createdTime)/1000;
 
           if(timeDelta < 60){
             return "less than 1 minute ago";
@@ -31,6 +29,12 @@
             return t + " hours ago";
           }
         };
+
+        var updatePrettyDates = function() {
+          $(".timestamp").each(function(){
+            $(this).text(prettyDate($(this).data("created")));
+          });
+        }
 
         $tweetContainer = $('<div id="tweetContainer"></div>');
         $tweetContainer.appendTo($body);
@@ -57,7 +61,7 @@
             $tweet = $('<div class="tweet">' +
               '<div class="heading">' +
                 '<div class="user"><span>@' + tweet.user + '</span></div>' +
-                '<div class="timestamp">' + prettyDate(tweet.created_at) + '</div>' +
+                '<div class="timestamp" data-created="' + tweet.created_at + '">' + prettyDate(tweet.created_at) + '</div>' +
               '</div>' +
               '<div class="content">' + tweet.message + '</div>' +
             '</div>');
@@ -69,6 +73,10 @@
 
         setInterval(function(){
           displayNewTweets();
+        }, 1000);
+
+        setInterval(function(){
+          updatePrettyDates();
         }, 1000);
 
       });
