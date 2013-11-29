@@ -13,6 +13,24 @@
       $(document).ready(function(){
         var $body = $('body');
         //$body.html('');
+        var startDate = new Date();
+        var startTime = startDate.getTime();
+
+        var prettyDate = function(timeStamp){
+          var currentDate = new Date();
+          var currentTime = currentDate.getTime();
+          var timeDelta = (currentTime - startTime)/1000;
+
+          if(timeDelta < 60){
+            return "less than 1 minute ago";
+          }else if (timeDelta >= 60 && timeDelta < 3600){
+            var t = Math.floor(timeDelta/60).toString();
+            return t + " minutes ago";
+          }else if (timeDelta >= 3600){
+            var t = Math.floor(timeDelta/3600).toString();
+            return t + " hours ago";
+          }
+        };
 
         $tweetContainer = $('<div id="tweetContainer"></div>');
         $tweetContainer.appendTo($body);
@@ -39,7 +57,7 @@
             $tweet = $('<div class="tweet">' +
               '<div class="heading">' +
                 '<div class="user"><span>@' + tweet.user + '</span></div>' +
-                '<div class="timestamp">' + tweet.created_at + '</div>' +
+                '<div class="timestamp">' + prettyDate(tweet.created_at) + '</div>' +
               '</div>' +
               '<div class="content">' + tweet.message + '</div>' +
             '</div>');
