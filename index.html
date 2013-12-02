@@ -44,16 +44,6 @@
         //initialize DisplayIndex;
         var displayIndex = 0;
 
-        /*var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div class="tweet"></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message + " // " + tweet.created_at);
-          $tweet.appendTo($tweetContainer);
-          index -= 1;
-          displayIndex +=1;
-        }*/
-
         //prepends new tweets to body
         var displayNewTweets = function(){
           var index = displayIndex;
@@ -62,7 +52,7 @@
             var tweet = streams.home[index];
             $tweet = $('<div class="tweet">' +
               '<div class="heading">' +
-                '<div class="user"><span>@' + tweet.user + '</span></div>' +
+                '<div class="user" data-username="' + tweet.user + '"><span>@' + tweet.user + '</span></div>' +
                 '<div class="timestamp" data-created="' + tweet.created_at + '">' + prettyDate(tweet.created_at) + '</div>' +
               '</div>' +
               '<div class="content">' + tweet.message + '</div>' +
@@ -73,6 +63,20 @@
           }
         };
 
+        //event handler - listens to clicks on usernames and hides tweets not from that user
+        $('#tweetContainer').on('click', 'span', function(){
+          var selectedUser = $(this).closest('.user').data('username');
+          $('.user').each(function(){
+            if($(this).data('username') != selectedUser){
+              $(this).closest('.tweet').fadeOut();
+            }
+          });
+        });
+
+        
+        //Initial Display of tweets
+        displayNewTweets();
+
         setInterval(function(){
           displayNewTweets();
         }, 1000);
@@ -80,6 +84,7 @@
         setInterval(function(){
           updatePrettyDates();
         }, 1000);
+
 
       });
 
