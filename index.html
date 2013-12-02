@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:900' rel='stylesheet' type='text/css'>
     <link rel="Stylesheet" type="text/css" href="main.css"/>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
   </head>
   <body>
-    <div id="header"><h1>Twittler</h1></div>
-    <div class="spacer"></div>
+    <div id="header"><span>Twittler</span></div>
     <script>
 
       $(document).ready(function(){
@@ -20,7 +20,9 @@
           var timeDelta = (currentTime - createdTime)/1000;
 
           if(timeDelta < 60){
-            return "less than 1 minute ago";
+            return "less than a minute ago";
+          }else if (timeDelta >= 60 && timeDelta < 120){
+            return "a minute ago";
           }else if (timeDelta >= 60 && timeDelta < 3600){
             var t = Math.floor(timeDelta/60).toString();
             return t + " minutes ago";
