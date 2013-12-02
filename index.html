@@ -75,22 +75,19 @@
         //event handler - listens to clicks on usernames and hides tweets not from that user
         $('#tweetContainer').on('click', '.user span', function(){
           clearInterval(tweetInterval);
-          $('#tweetInput').fadeOut();
-          //$('#fullFeedButton').fadeIn();
+          $('#tweetInput').fadeOut(400, function(){$('#fullFeedButton').fadeIn()});
           var selectedUser = $(this).closest('.user').data('username');
           $('.user').each(function(){
             if($(this).data('username') != selectedUser){
               $(this).closest('.tweet').slideUp(800);
             }
           });
-          $('#fullFeedButton').fadeIn();
         });
 
         //event handler - listens to clicks on #header span to return to the full feed (fades in all tweets and resest interval)
         //bug? clicking multiple times fires multiple set intervals
-        $('#header span').on('click', function(){
-          $('#fullFeedButton').fadeOut();
-          $('#tweetInput').fadeIn();
+        $('#fullFeedButton').on('click', function(){
+          $('#fullFeedButton').fadeOut(400, function(){$('#tweetInput').fadeIn()});
           $('.tweet').each(function(){
             $(this).slideDown(800);
           });
