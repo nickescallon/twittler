@@ -17,7 +17,10 @@
       </div>
     </div>
     <script>
-
+      //prompts for username and creates and empty streams.users array for tweet functionality
+      var visitor = prompt("what's your username?") || "Anonymous";
+      streams.users[visitor] = [];
+        
       $(document).ready(function(){
         var $body = $('body');
         $tweetContainer = $('<div id="tweetContainer"></div>');
@@ -62,7 +65,7 @@
             $tweet = $('<div class="tweet">' +
               '<div class="heading">' +
                 '<div class="user" data-username="' + tweet.user + '"><span>@' + tweet.user + '</span></div>' +
-                '<div class="timestamp" data-created="' + tweet.created_at + '">' + prettyDate(tweet.created_at) + '</div>' +
+                '<div class="timestamp" data-created="' + (tweet.created_at || new Date()) + '">' + prettyDate(tweet.created_at || new Date()) + '</div>' +
               '</div>' +
               '<div class="content">' + tweet.message + '</div>' +
             '</div>');
@@ -75,7 +78,7 @@
         //event handler - listens to clicks on usernames and hides tweets not from that user
         $('#tweetContainer').on('click', '.user span', function(){
           clearInterval(tweetInterval);
-          $('#tweetInput').fadeOut(400, function(){$('#fullFeedButton').fadeIn()});
+          $('#tweetInput').fadeOut(function(){$('#fullFeedButton').fadeIn()});
           var selectedUser = $(this).closest('.user').data('username');
           $('.user').each(function(){
             if($(this).data('username') != selectedUser){
@@ -84,10 +87,10 @@
           });
         });
 
-        //event handler - listens to clicks on #header span to return to the full feed (fades in all tweets and resest interval)
+        //event handler - listens to clicks on #fullFeedButton to return to the full feed (fades in all tweets and resest interval)
         //bug? clicking multiple times fires multiple set intervals
         $('#fullFeedButton').on('click', function(){
-          $('#fullFeedButton').fadeOut(400, function(){$('#tweetInput').fadeIn()});
+          $('#fullFeedButton').fadeOut(function(){$('#tweetInput').fadeIn()});
           $('.tweet').each(function(){
             $(this).slideDown(800);
           });
@@ -95,6 +98,17 @@
             displayNewTweets();
           }, 1000);
         });
+
+        //Allows a user to tweet using the #tweetInput
+        //currently this does not define a timestamp - need to check why
+        $('#tweetInput').keypress(function(e){
+          if (e.which == 13){
+            msg = $(this).val();
+            writeTweet(msg);
+            $(this).val('');
+          }
+        });
+        
 
         
         //Initial Display of tweets
