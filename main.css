@@ -74,7 +74,7 @@ body {
 
 
 .tweet {
-	height: 80px;
+	height: 95px;
 	width: 450px;
 	background-color: white;
 	border-bottom: 1px solid #D8D8D8;
@@ -112,4 +112,5 @@ body {
 	height: 30%;
 	width: 90%;
 	padding: 3% 5%;
+	word-wrap: break-word;
 }
