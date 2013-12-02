@@ -7,12 +7,23 @@
     <script src="data_generator.js"></script>
   </head>
   <body>
-    <div id="header"><span>Twittler</span></div>
+    <div id="header">
+      <div id="toolbarLeft">
+        <span>Twittler</span>
+      </div>
+      <div id="toolbarRight">
+        <input id="tweetInput" value="tweet something here..."></input>
+        <div id="fullFeedButton">Return to Full Feed</div>
+      </div>
+    </div>
     <script>
 
       $(document).ready(function(){
         var $body = $('body');
+        $tweetContainer = $('<div id="tweetContainer"></div>');
+        $tweetContainer.appendTo($body);
 
+        //Takes a timestamp and returns the delta in a human friendly way
         var prettyDate = function(timeStamp){
           var currentDate = new Date();
           var currentTime = currentDate.getTime();
@@ -32,14 +43,12 @@
           }
         };
 
+        //calls prettyDate on all .timestamp divs. Meant to be called on an interval
         var updatePrettyDates = function() {
           $(".timestamp").each(function(){
             $(this).text(prettyDate($(this).data("created")));
           });
         }
-
-        $tweetContainer = $('<div id="tweetContainer"></div>');
-        $tweetContainer.appendTo($body);
 
         //initialize DisplayIndex;
         var displayIndex = 0;
@@ -64,20 +73,26 @@
         };
 
         //event handler - listens to clicks on usernames and hides tweets not from that user
-        $('#tweetContainer').on('click', 'span', function(){
+        $('#tweetContainer').on('click', '.user span', function(){
+          clearInterval(tweetInterval);
+          $('#tweetInput').fadeOut();
+          //$('#fullFeedButton').fadeIn();
           var selectedUser = $(this).closest('.user').data('username');
           $('.user').each(function(){
             if($(this).data('username') != selectedUser){
-              $(this).closest('.tweet').fadeOut();
+              $(this).closest('.tweet').slideUp(800);
             }
           });
-          clearInterval(tweetInterval);
+          $('#fullFeedButton').fadeIn();
         });
 
         //event handler - listens to clicks on #header span to return to the full feed (fades in all tweets and resest interval)
+        //bug? clicking multiple times fires multiple set intervals
         $('#header span').on('click', function(){
+          $('#fullFeedButton').fadeOut();
+          $('#tweetInput').fadeIn();
           $('.tweet').each(function(){
-            $(this).fadeIn();
+            $(this).slideDown(800);
           });
           tweetInterval = setInterval(function(){
             displayNewTweets();
@@ -96,7 +111,7 @@
         //Defines an interval for updatePrettyDates() // This can be run once a minute instead of once a second... 
         setInterval(function(){
           updatePrettyDates();
-        }, 1000);
+        }, 10000);
 
 
       });

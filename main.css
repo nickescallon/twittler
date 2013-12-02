@@ -7,10 +7,13 @@ body {
 	height: 55px;
 	width: 100%;
 	top: 0;
-	background: linear-gradient(grey,darkgrey);
+	//background: linear-gradient(grey,darkgrey);
+	background-color: white;
 	position: fixed;
 	color: white;
 	box-shadow: 0px 2px 2px #888888;
+	//display: inline-block;
+	text-align: center;
 }
 
 #header span {
@@ -19,7 +22,50 @@ body {
 	font-family: 'Roboto', sans-serif;
 	font-size: 2em;
 	text-shadow: 0px 2px 2px grey;
+	float: left;
+}
+
+#toolbarLeft{
+	height: 100%;
+	width: 49%;
 	display: inline-block;
+	vertical-align: top;
+	//border: 1px solid black;
+}
+
+#toolbarRight{
+	height: 100%;
+	width: 49%;
+	display: inline-block;
+	vertical-align: top;
+	text-align: right;
+	//border: 1px solid black;
+}
+
+#tweetInput {
+	width: 300px;
+	margin-top: 25px;
+	//margin-left: 25px;
+	background-color: lightgrey;
+	border: 1px solid white;
+	border-radius: 10px;
+	padding: 5px 2px;
+	box-shadow: 0px 1px 2px white;
+	outline-width: 0;
+	//display: inline-block;
+	//float: left;
+}
+
+#fullFeedButton {
+	height: 75%;
+	width: 75px;
+	margin-top: 10px;
+	//text-align: center;
+	font-size: 15px;
+	//font-weight: bold;
+	float: right;
+	display: none;
+	color: grey;
 }
 
 .spacer {
@@ -67,6 +113,7 @@ body {
 .user span {
 	font-size: 1em;
 	font-weight: bold;
+	cursor: pointer;
 }
 
 .timestamp {
