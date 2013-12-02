@@ -12,7 +12,7 @@
         <span>Twittler</span>
       </div>
       <div id="toolbarRight">
-        <input id="tweetInput" value="tweet something here..."></input>
+        <input id="tweetInput" placeholder="tweet something here..."></input>
         <div id="fullFeedButton">Return to Full Feed</div>
       </div>
     </div>
@@ -87,8 +87,8 @@
           });
         });
 
-        //event handler - listens to clicks on #fullFeedButton to return to the full feed (fades in all tweets and resest interval)
-        //bug? clicking multiple times fires multiple set intervals
+        //event handler - listens to clicks on #fullFeedButton to return to the full feed (fades in all tweets and resets interval)
+        //bug? clicking multiple times fires multiple set intervals, almost negated by faceout, but should fix logic
         $('#fullFeedButton').on('click', function(){
           $('#fullFeedButton').fadeOut(function(){$('#tweetInput').fadeIn()});
           $('.tweet').each(function(){
@@ -100,7 +100,6 @@
         });
 
         //Allows a user to tweet using the #tweetInput
-        //currently this does not define a timestamp - need to check why
         $('#tweetInput').keypress(function(e){
           if (e.which == 13){
             msg = $(this).val();
@@ -108,8 +107,6 @@
             $(this).val('');
           }
         });
-        
-
         
         //Initial Display of tweets
         displayNewTweets();
